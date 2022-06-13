@@ -25,10 +25,25 @@ namespace Loader
                 Builder builder = new Builder();
                 builder.Step1();
                 worker.ReportProgress(40, "Step1");
+                if (worker.CancellationPending)
+                {
+                    args.Cancel = true;
+                    return;
+                }
                 builder.Step2();
                 worker.ReportProgress(80, "Step2");
+                if (worker.CancellationPending)
+                {
+                    args.Cancel = true;
+                    return;
+                }
                 builder.Step3();
                 worker.ReportProgress(100, "Step3");
+                if (worker.CancellationPending)
+                {
+                    args.Cancel = true;
+                    return;
+                }
             };
             loader.ShowDialog();
         }

@@ -22,6 +22,7 @@ namespace Loader
             progressBar.Style = pStyle;
             backgroundWorker = worker;
             backgroundWorker.WorkerReportsProgress = true;
+            backgroundWorker.WorkerSupportsCancellation = true;
             backgroundWorker.ProgressChanged += backgroundWorker_ProgressChanged;
             backgroundWorker.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
         }
@@ -53,6 +54,11 @@ namespace Loader
                 DialogResult = DialogResult.OK;
             });
             t.Start();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            backgroundWorker.CancelAsync();
         }
     }
 }
